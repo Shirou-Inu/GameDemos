@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddu55balbp8df"]
+
+[ext_resource type="Script" path="res://characters/base_character/spell.gd" id="1_y00lc"]
+
+[node name="Spell" type="Node2D"]
+top_level = true
+script = ExtResource("1_y00lc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(1, 0, 0, 1)

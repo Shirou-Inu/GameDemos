@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://mi07ewf4t6t8"]
+
+[ext_resource type="Script" path="res://characters/base_character/base_character.gd" id="1_3tfvk"]
+[ext_resource type="PackedScene" uid="uid://c8jtwakyht0jp" path="res://characters/base_character/sword.tscn" id="2_38k31"]
+[ext_resource type="Script" path="res://characters/base_character/SpellCastPoint.gd" id="3_1m2gs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obuu5"]
+size = Vector2(40, 40)
+
+[node name="BaseCharacter" type="CharacterBody2D"]
+script = ExtResource("1_3tfvk")
+
+[node name="AttackPivot" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Sword" parent="AttackPivot" instance=ExtResource("2_38k31")]
+unique_name_in_owner = true
+
+[node name="SpellCastPoint" type="Marker2D" parent="AttackPivot"]
+unique_name_in_owner = true
+position = Vector2(38, 0)
+script = ExtResource("3_1m2gs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_obuu5")
+
+[node name="PrimaryCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="SecondaryCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="PrimaryCooldownTimer" to="." method="_on_primary_cooldown_timer_timeout"]
+[connection signal="timeout" from="SecondaryCooldownTimer" to="." method="_on_secondary_cooldown_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
